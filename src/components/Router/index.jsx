@@ -31,7 +31,7 @@ const routes = withErrorElement([
 ])
 
 const Router = () => {
-  const router = createBrowserRouter(withErrorElement(routes), { basename: window.VITE_BASENAME })
+  const router = createBrowserRouter(withErrorElement(routes), { basename: window.APP_BASENAME })
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={router} />

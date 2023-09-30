@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import { name } from './package.json'
+import { version, name } from './package.json'
 
 const root = resolve(__dirname, 'src')
 const outDir = resolve(__dirname, 'dist')
@@ -11,7 +11,8 @@ const endpointFileName = 'index.html'
 export default defineConfig({
   base: './',
   define: {
-    'window.VITE_BASENAME': `"${process.env.BASENAME ? `/${name}` : ''}"`
+    'window.APP_VERSION': `"${version}"`,
+    'window.APP_BASENAME': `"${process.env.BASENAME ? `/${name}` : ''}"`
   },
   root,
   plugins: [react()],
