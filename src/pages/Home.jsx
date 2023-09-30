@@ -10,9 +10,9 @@ const Home = () => (
       Button
     </button>
     <br />
-    <Link to='./about'>about</Link>
+    <Link to='/about'>about</Link>
     <br />
-    <Link to='./detail'>detail</Link>
+    <Link to='/detail'>detail</Link>
   </h1>
 )
 
