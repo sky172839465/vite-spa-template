@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import useGithubRepo from '../hooks/useGithubRepo'
+import useUserData from '../hooks/useUserData'
 
 const Detail = () => {
-  const { data, isLoading, isError } = useGithubRepo()
+  const { data, isLoading, isError } = useUserData()
 
   if (isLoading) {
     return (<p>loading detail</p>)
