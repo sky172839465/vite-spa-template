@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import { viteMockServe } from 'vite-plugin-mock'
 import { version, name } from './package.json'
 
 const root = resolve(__dirname, 'src')
@@ -15,7 +16,13 @@ export default defineConfig({
     'window.APP_BASENAME': `"${process.env.BASENAME ? `/${name}` : ''}"`
   },
   root,
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteMockServe({
+      mockPath: 'mock',
+      localEnabled: !!process.env.MOCK
+    })
+  ],
   build: {
     outDir,
     emptyOutDir: true,
@@ -25,9 +32,13 @@ export default defineConfig({
       }
     }
   },
-  resolve: {
-    alias: {
-      '@': root
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.github.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 })
