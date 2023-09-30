@@ -1,22 +1,30 @@
-name: auto tag
+name: bump version
 on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  bump-version:
+    name: "Bump Version"
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Configure Git
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Update Version
-        run: npm version patch
-      - name: Push Changes
-        run: |
-          git push
-          git push --tags
-          git commit -m "ci: auto update version by github-actions[bot]"
+      - name: "Checkout source code"
+        uses: "actions/checkout@v3"
+        with:
+          ref: ${{ github.ref }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
+        with:
+          version-type: "minor"
+          target-branch: "main"
+          tag-prefix: "v"
+          commit-message: "ci: bumps version to {{version}} by github-actions[bot] [skip ci]"
