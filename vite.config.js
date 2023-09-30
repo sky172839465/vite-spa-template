@@ -8,6 +8,7 @@ const endpointFileName = 'index.html'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   root,
   plugins: [react()],
   build: {
