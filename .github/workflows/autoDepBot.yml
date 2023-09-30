@@ -1,14 +1,13 @@
-dependabot:
-  name: "Dependabot"
-  # After the E2E and build jobs, if one of them fails, it won't merge the PR.
-  # needs: [build, e2e]
-  runs-on: ubuntu-latest
-  # Detect that the PR author is dependabot
-  if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
-  steps:
-    - name: Enable auto-merge for Dependabot PRs
-      # Use Github CLI to merge automatically the PR
-      run: gh pr merge --auto --merge "$PR_URL"
-      env:
-        PR_URL: ${{github.event.pull_request.html_url}}
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+name: auto-merge
+
+on:
+  pull_request:
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
