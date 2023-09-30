@@ -27,4 +27,4 @@ jobs:
           version-type: "minor"
           target-branch: "main"
           tag-prefix: "v"
-          commit-message: "ci: bumps version to {{version}} by github-actions[bot] [skip ci]"
+          commit-message: "ci: bumps version to {{version}}"
