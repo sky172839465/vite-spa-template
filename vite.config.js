@@ -11,7 +11,7 @@ const endpointFileName = 'index.html'
 export default defineConfig({
   base: './',
   define: {
-    VITE_BASENAME: `"${process.env.BASENAME ? `/${name}` : ''}"`
+    'window.VITE_BASENAME': `"${process.env.BASENAME ? `/${name}` : ''}"`
   },
   root,
   plugins: [react()],
