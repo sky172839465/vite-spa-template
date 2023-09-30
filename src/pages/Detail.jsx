@@ -4,7 +4,7 @@ const Detail = () => (
   <h1 className='text-3xl font-bold underline'>
     Hello Detail!
     <br />
-    <Link to='/'>home</Link>
+    <Link to='../'>home</Link>
   </h1>
 )
 
