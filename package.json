@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.2.0",
   "type": "module",
+  "homepage": "https://sky172839465.github.io/vite-spa-template/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:gh": "BASENAME=1 npm run build",
     "lint": "eslint . --ext .js,.cjs,.jsx",
     "lint:fix": "npm run lint -- --fix",
     "preview": "vite preview",

@@ -10,7 +10,7 @@ const pages = import.meta.glob('../../pages/*.jsx')
 
 const dynamicRoutes = Object.entries(pages).map(([path, page]) => {
   const componentName = path.split('/').pop().replace(/.jsx$/, '')
-  const routePath = componentName === 'Home' ? '/' : `/${componentName.toLowerCase()}`
+  const routePath = componentName === 'Home' ? '/*' : `/${componentName.toLowerCase()}`
   const Component = lazy(page)
   return {
     path: routePath,
@@ -31,7 +31,7 @@ const routes = withErrorElement([
 ])
 
 const Router = () => {
-  const router = createBrowserRouter(withErrorElement(routes))
+  const router = createBrowserRouter(withErrorElement(routes), { basename: window.VITE_BASENAME })
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={router} />
