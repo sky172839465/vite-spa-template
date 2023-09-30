@@ -30,8 +30,9 @@ const routes = withErrorElement([
   ...dynamicRoutes
 ])
 
+// const router = createBrowserRouter(withErrorElement(routes), { basename: window.VITE_BASENAME })
 const Router = () => {
-  const router = createBrowserRouter(withErrorElement(routes), { basename: window.VITE_BASENAME })
+  const router = createBrowserRouter(withErrorElement(routes), { basename: '/vite-spa-template' })
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={router} />
